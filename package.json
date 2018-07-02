@@ -1,5 +1,5 @@
 {
-  "name": "ftc-platform-react",
+  "name": "react-member",
   "version": "1.0.0",
   "description": "It can guide user to download app in different platform",
   "main": "tmp/index.js",
@@ -12,22 +12,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunhannie/ftc-platform-react.git"
+    "url": "git+https://github.com/sunhannie/react-member"
   },
   "files": [
     "tmp"
   ],
   "keywords": [
-    "platfrom",
+    "member",
     "react",
     "ftchinese"
   ],
   "author": "hehuiyun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sunhannie/ftc-platform-react/issues"
+    "url": "https://github.com/sunhannie/react-member/issues"
   },
-  "homepage": "https://github.com/sunhannie/ftc-platform-react#readme",
+  "homepage": "https://github.com/sunhannie/react-member#readme",
   "dependencies": {
     "classnames": "^2.2.5",
     "debug": "^3.1.0",

@@ -37,12 +37,13 @@ app.use(webpackMiddleware({
 }));
 
 
-// router.get('/',(ctx, next)=>{
-//     ctx.type = 'html';
-//     ctx.body = fs.readFileSync('./client/index.html');
-// });
-
 router.get('/', async ctx => {
+  ctx.body = await render('membership.html', {
+    pageTitle: '会员订阅'
+  })
+});
+
+router.get('/index', async ctx => {
   ctx.body = await render('index.html', {
     pageTitle: '登录'
   })
@@ -53,19 +54,15 @@ router.get('/signup', async ctx => {
     pageTitle: '注册'
   })
 });
-// router.get('/tmp/*',(ctx, next)=>{
-//     ctx.body = fs.readFileSync('./tmp/index.js');
-// });
+
 
 router.get('/jsonData',(ctx, next)=>{
-  // console.log(fs.readFileSync('./data.json'));
     ctx.body = fs.readFileSync('./data.json');
 });
 
 // 这里是为什么不能的读取到
 router.get('/jsonDataa',(ctx, next)=>{
     ctx.type = 'json';
-    // ctx.body = fs.readFileSync('./client/component/login/jsonData.json');
     ctx.body = fs.readFileSync('./package.json');
 });
 app.use(router.routes())

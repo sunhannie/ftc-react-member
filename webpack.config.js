@@ -9,7 +9,6 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry:
     {
-        // 'index':path.join(__dirname, 'client/index.js')
         'index':['./client/index.js'],
         'signup':['./client/scripts/signup.js']
     },
@@ -24,12 +23,12 @@ module.exports = {
              {
 
                 test: /\.js|\.jsx$/,
-                include: [
-                    path.join(__dirname, 'client'),
-                    path.join(__dirname, 'client',"scripts"),
-                    path.join(__dirname, "client","component","login"),
-                    path.join(__dirname, "client","component","nav"),
-                ],
+                // include: [
+                //     path.join(__dirname, 'client'),
+                //     path.join(__dirname, 'client',"scripts"),
+                //     path.join(__dirname, "client","component","login"),
+                //     path.join(__dirname, "client","component","nav"),
+                // ],
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
@@ -38,16 +37,13 @@ module.exports = {
                     presets: ['react','es2015']
                 },
              },
-            //  {
-            //     test: /\.css$/,
-            //     include: [
-            //         path.join(__dirname, "client","component")
-            //     ],
-            //     exclude: [
-            //         path.resolve(__dirname, "node_modules")
-            //     ],
-            //     loader: sassLoader
-            //  },
+             {
+                test: /\.css$/,
+                exclude: [
+                    path.resolve(__dirname, "node_modules")
+                ],
+                loader: sassLoader
+             },
              {
                 test: /\.json?$/,
                 loader: 'json'
@@ -57,10 +53,6 @@ module.exports = {
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
-                // include: [
-                //     path.join(__dirname, "client","component","login"),
-                //     path.join(__dirname, "client","component","nav")
-                // ],
                 loader: sassLoaderDemo  
              },
              {
@@ -105,7 +97,6 @@ module.exports = {
     },
      resolve: {
         alias: {
-      //Create aliases to import or require certain modules more easily. Eg: in app.js, "import React from '../node_modules/react';" can now be written as "import React from 'react"
             'react': path.join(__dirname,'node_modules','react')
         },
         extensions: [".js", ".json", ".jsx", ".css", ".scss"],
@@ -117,7 +108,7 @@ module.exports = {
     },
 
     plugins: [
-        // new webpack.HotModuleReplacementPlugin()
+       
     ]
     // watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
