@@ -1,12 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");  
+var ExtractTextPlugin = require("extract-text-webpack-plugin"); 
+const extractCSS = new ExtractTextPlugin('one.css'); 
 
-const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
-});
+// const extractSass = new ExtractTextPlugin({
+//     filename: "[name].[contenthash].css",
+//     disable: process.env.NODE_ENV === "development"
+// });
 
 module.exports = {
     mode: "development", 
@@ -26,13 +27,9 @@ module.exports = {
     module: {
         rules:[
              {
-
                 test: /\.js|\.jsx$/,
                 // include: [
                 //     path.join(__dirname, 'client'),
-                //     path.join(__dirname, 'client',"scripts"),
-                //     path.join(__dirname, "client","component","login"),
-                //     path.join(__dirname, "client","component","nav"),
                 // ],
                 exclude: [
                     path.resolve(__dirname, "node_modules")
@@ -48,9 +45,8 @@ module.exports = {
                     path.resolve(__dirname, "node_modules")
                 ],
                 loader: 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true',
-                // use: [{  
-                //         loader: 'style-loader' 
-                //     }]
+                // use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
+             
              },
              {
                 test: /\.json?$/,
@@ -61,7 +57,7 @@ module.exports = {
             //     exclude: [
             //         path.resolve(__dirname, "node_modules")
             //     ],
-            //     loader: 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'  
+            //     loader: 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'    //用此方法靠style type="text/css"引入
             //  },
              {
                 test: /\.html$/,
@@ -75,17 +71,20 @@ module.exports = {
                 ]
             },
             {
-                test:  /\.scss$/,
+                test:  /\.scss$/,  
+                exclude: [
+                    path.resolve(__dirname, "node_modules")
+                ],
                 use: [
                     {  
                         loader: 'style-loader'   // 将 JS 字符串生成为 style 节点
                     },
                     {
                         loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
-                        options: {
-                            modules: true,
-                            sourceMap: true
-                        }
+                        // options: {
+                        //     modules: true,
+                        //     sourceMap: true   //添加了它会变成用外链引入，比如<link type="text/css" rel="stylesheet" href="blob:http://localhost:9000/d0adec7b-34ef-470b-bac1-9559f9f6eb5e">
+                        // }
                     },
                     {
                         loader: 'sass-loader',  // 将 Sass 编译成 CSS
@@ -112,9 +111,8 @@ module.exports = {
 
     plugins: [
     //    extractSass
+       extractCSS
     ],
     watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
 };
-
-// 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'  

@@ -17,7 +17,7 @@ class Qanda extends React.Component {
   }
 
   componentWillMount() {
-
+    console.log(QandA);
   }
   componentDidMount() {
         ajax('http://localhost:9000/memberData').then(response => {

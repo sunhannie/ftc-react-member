@@ -83,3 +83,17 @@ node-sass 和 webpack 是 sass-loader 的 peerDependency，因此能够精确控
 
 
 https://segmentfault.com/q/1010000013564212/a-1020000014100311
+
+blob:http://localhost:9000/cc7ae692-6a3a-4f18-a0e7-8f9c5232efc5  生成的css文件名
+https://www.npmjs.com/package/extract-text-webpack-plugin  (插件用法)
+```
+test: /\.css$/,
+use: ExtractTextPlugin.extract({
+    fallback: "style-loader", // 编译后用什么loader来提取css文件
+    use: "css-loader" // 指需要什么样的loader去编译文件,这里由于源文件是.css所以选择css-loader
+})
+```
+
+## 最终文件布局
+一个组件，一个css文件。
+好像extract-text-webpack-plugin没有生效
