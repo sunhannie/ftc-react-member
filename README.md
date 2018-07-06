@@ -39,3 +39,20 @@ https://reactjs.org/docs/lists-and-keys.html#keys
 Warning: Each child in an array or iterator should have a unique "key" prop.
 
 // 为什么会出现2遍数据?因为生命周期中渲染第一次为空，
+
+QandA.js:1 Uncaught Error: Module build failed: SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag (26:72)   
+必须有一个wrap标签
+
+第一次都为空，为什么map能渲染出来呢
+
+```
+let responses = response.index.map((item,index)=>{
+    return <div key={index}><li key={index}>{item.title}{item.price}</li></div>
+})
+let response1 = response.index.map((item,index)=>{
+    return <div key={index}><li key={index}>{item.title}{item.price}</li></div>
+})
+let response1 = (()=>{
+    return <div><li>11{response.index[0].title}</li></div>
+})
+```
