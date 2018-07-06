@@ -60,6 +60,10 @@ router.get('/jsonData',(ctx, next)=>{
     ctx.body = fs.readFileSync('./data.json');
 });
 
+router.get('/memberData',(ctx, next)=>{
+    ctx.body = fs.readFileSync('./client/api/data.json');
+});
+
 // 这里是为什么不能的读取到
 router.get('/jsonDataa',(ctx, next)=>{
     ctx.type = 'json';

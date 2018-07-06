@@ -10,7 +10,8 @@ module.exports = {
     entry:
     {
         'index':['./client/index.js'],
-        'signup':['./client/scripts/signup.js']
+        'signup':['./client/scripts/signup.js'],
+        'member':['./client/scripts/member.js']
     },
     output: {
         path: path.join(__dirname, 'tmp/'),  //这儿好像没起作用
@@ -109,8 +110,8 @@ module.exports = {
 
     plugins: [
        
-    ]
-    // watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
+    ],
+    watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
 };
 
