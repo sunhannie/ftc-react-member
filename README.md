@@ -37,3 +37,5 @@ https://reactjs.org/docs/lists-and-keys.html#keys
 使用key就能消除下面warning，可以根据props值获取key后面的值，所以应该传到组件中
 
 Warning: Each child in an array or iterator should have a unique "key" prop.
+
+// 为什么会出现2遍数据?因为生命周期中渲染第一次为空，
