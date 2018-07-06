@@ -9,61 +9,73 @@ import QandA from './QandA.scss';
 class Qanda extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {pageData:{}};
+
     // this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
-    let newData = {};
-
     ajax('http://localhost:9000/memberData').then(data => {
+        console.log(data);
         return Promise.resolve(data);
-    }).then(data => {
-        newData = Object.assign({}, data);
-        this.setState(data);
+    }).then(data => {  
+        this.setState({pageData:data});
+        console.log(this.state);
     }).catch(e => {
         console.log(e);
         alert(`Error: ${e}`);
     });
   }
   componentDidMount() {
-    
+
   }
 
   componentWillReceiveProps(nextProps) {
     
   }
-//   handleChange = (e) => {
-//     console.log('e');
-//   }
-// 为什么会出现2遍数据
+  // shouldComponentUpdate(){
+  //   return true
+  // }
+  handleChange(event) {
+  // handleChange = (e) => {  //这种写法为什么写错了，难道是必须写在input标签中吗？
+    // this.setState({data: event.target.value});
+  }
+// 为什么会出现2遍数据?因为生命周期中渲染第一次为空，
   render() {
-    const data = this.state;
+    // 此处一直会先渲染一遍
+    const data = this.state.pageData;
     const guide = data.guide;
-    console.log('index:'+(data.index));
+    let span = 'span';
+    let arr = [];
     if(data.index){
-      (data.index).map(function(data){
-						console.log(data);	
+       span = (data.index).map(function(value,key){
+					console.log(value);	
+          arr.push(value);
+          return  <span key = {value.title}>会员类型</span>
 		  })
     }
+    console.log('arr:'+guide);
+    // console.log(typeof guide);
     
-    console.log(typeof guide);
-    
-    
-    let aaa = '2';
+    // 发现一现象：input中的值aaa，不会根据自己输入的值变化，页面中会一直显示2，因为是最终render的
+    let inputVal = '2';
     return (
       <div className="login-container">
         <div className="content-section">
             <div className="inner-section">
                 
-            <span>传变量，再循环。怎么传变量</span>
-    
-            {/*state.map((post, i) =>
-            <li key={i}>{post.guide}</li>
+            <span>怎么从后台fetch到数据？</span>
+            <div>{span}</div>
+            {/*arr.map((post) =>
+            <li key={}>{post.guide}</li>
             )*/}
             {/*<div>{state.guide}</div>*/}
-            {/*<input value={this.state.data} onChange={this.handleChange}/>*/}
-            <div>{aaa}</div>
+            <input value={inputVal} onChange={this.handleChange}/>
+            <input value={inputVal} onChange={(e)=> {console.log('1');}}/>
+            {/*<input value="<?=$data?>" onChange={this.handleChange}/>*/}
+            <input value={inputVal} onChange={this.handleChange.bind(this)}/>
+            
+            <div></div>
             </div>
         </div>
     </div>
