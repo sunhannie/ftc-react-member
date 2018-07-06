@@ -56,3 +56,30 @@ let response1 = (()=>{
     return <div><li>11{response.index[0].title}</li></div>
 })
 ```
+
+## 配置问题
+如果css-loader写在sass-loader之后，会出现以下错误
+
+ERROR in ./node_modules/sass-loader/lib/loader.js??ref--8-1!./node_modules/css-loader??ref--8-2!./client/component/nav/nav.scss
+Module build failed:
+
+css-loader 解释(interpret) @import 和 url() ，会 import/require() 后再解析(resolve)它们。
+引用资源的合适 loader 是 file-loader 和 url-loader，您应该在配置中指定（查看如下设置）。
+import css from 'file.css';
+
+http://www.css88.com/doc/webpack/loaders/css-loader/
+
+http://www.css88.com/doc/webpack/loaders/sass-loader/
+
+建议将 style-loader 与 css-loader 结合使用
+
+顺序一定要：'style-loader'   'css-loader'  'sass-loader'
+
+通过将 style-loader 和 css-loader 与 sass-loader 链式调用，可以立刻将样式作用在 DOM 元素。
+
+node-sass 和 webpack 是 sass-loader 的 peerDependency，因此能够精确控制它们的版本。
+
+线上最好能将css文件不依赖于js文件，成为一个单独的文件
+
+
+https://segmentfault.com/q/1010000013564212/a-1020000014100311

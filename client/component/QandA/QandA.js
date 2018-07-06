@@ -24,12 +24,13 @@ class Qanda extends React.Component {
             return Promise.resolve(response);
         }).then(response => {
             let responses = response.index.map((item,index)=>{
-              return <div key={index}><li key={index}>{item.title}{item.price}</li></div>
+              return <div key={index}><span class="index-title">{item.title}</span><span>{item.price}</span><span>{item.type}</span></div>
             })
 
             let response1 = (()=>{
-              return <div><li>11{response.index[0].title}</li></div>
+              return <div><li>{response.index[0].title}</li></div>
             })
+
             this.setState({
               datas:responses,
               response:response1()

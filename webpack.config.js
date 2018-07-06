@@ -1,8 +1,12 @@
 var webpack = require('webpack');
 var path = require('path');
-// var HtmlWebpackPlugin = require('html-webpack-plugin');
-const sassLoader = 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true';
-const sassLoaderDemo = 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true';
+
+var ExtractTextPlugin = require("extract-text-webpack-plugin");  
+
+const extractSass = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
 
 module.exports = {
     mode: "development", 
@@ -43,19 +47,22 @@ module.exports = {
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
-                loader: sassLoader
+                loader: 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true',
+                // use: [{  
+                //         loader: 'style-loader' 
+                //     }]
              },
              {
                 test: /\.json?$/,
                 loader: 'json'
              },
-             {
-                test: /\.scss$/,
-                exclude: [
-                    path.resolve(__dirname, "node_modules")
-                ],
-                loader: sassLoaderDemo  
-             },
+            //  {
+            //     test: /\.scss$/,
+            //     exclude: [
+            //         path.resolve(__dirname, "node_modules")
+            //     ],
+            //     loader: 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'  
+            //  },
              {
                 test: /\.html$/,
                 use: [
@@ -67,33 +74,28 @@ module.exports = {
                     }
                 ]
             },
-            // {
-                // test:  /\.scss$/,
-                // include: [
-                //     path.join(__dirname, 'client','styles'),
-                //     path.join(__dirname, 'component','nav')
-                // ],
-                // use: [
-
-                //     {  
-                //         loader: 'style-loader' 
-                //     },
-                //     {
-                //         loader: "sass-loader",
-                //         options: {
-                //             includePaths: [ 
-                //                 path.join(__dirname, 'component','login')
-                //             ]
-                //         }
-                //     },
-                //     {
-                //         loader: 'css-loader',
-                //         options: {
-                //             modules: true
-                //         }
-                //     }
-                // ]
-            // }
+            {
+                test:  /\.scss$/,
+                use: [
+                    {  
+                        loader: 'style-loader'   // 将 JS 字符串生成为 style 节点
+                    },
+                    {
+                        loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
+                        options: {
+                            modules: true,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',  // 将 Sass 编译成 CSS
+                        options: { 
+                            sourceMap:true  ,
+                            sourceMapContents:true
+                        }
+                    }
+                ]
+            }
         ]  //end rules    
     },
      resolve: {
@@ -109,7 +111,7 @@ module.exports = {
     },
 
     plugins: [
-       
+    //    extractSass
     ],
     watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
     
