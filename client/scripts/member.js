@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory,hashHistory } from 'react-router'
 
 import Nav from '../component/nav/nav.js';
 import QandA from '../component/QandA/QandA.js';
