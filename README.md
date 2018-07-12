@@ -97,3 +97,53 @@ use: ExtractTextPlugin.extract({
 ## 最终文件布局
 一个组件，一个css文件。
 好像extract-text-webpack-plugin没有生效
+
+## react
+创建组件必须放在包裹的div中，这是为什么呢？源码肯定能告诉答案，需要去研究。通过报的错去寻找问题
+```
+  <div>
+    <About />
+    <Index />
+    <Router>    
+        <div>
+            <Link to="/about">About</Link>
+            <Link to="/index">Index</Link>
+            <Route exact path="/Index" component={Index}/>  
+            <Route path="/about" component={About}/>
+        </div>
+    </Router>
+  </div>
+
+  <!--Link是链接，根据Link中的to，能相应打开Route中的链接-->
+```
+```
+for (const [key,value] of Object.entries(item)) {
+    // console.log(`${value}`); //`${value}`变成字符串，value就是原值
+}
+```
+```
+return <div class="o-expander" id="o-expander" key={index}> return 和 标签返回值必须同行
+```
+```
+let tabContent = response.tabContent1.map((item,index)=>{
+    return <div class="o-expander" id="o-expander" key={index}>
+            <div class="toggle" aria-expanded="false" >
+            <a class="o-expander__toggle" aria-controls="o-expander__one">{item.question}<i></i>
+            </a><span></span>
+        </div>
+        <div class="o-expander__content"  aria-hidden="true">
+            <div class = "o-content_wrap">
+            <div class="o-content">
+                    <p class="o-content_body">{item.answers}</p>  
+            </div>
+            </div>
+        </div>
+    </div>
+    
+})
+
+let response1 = (()=>{
+    return <div><li>{response.index[0].title}</li></div>
+})
+```
+react标签中不能加style，标签得按照严格模式写，即不能大写

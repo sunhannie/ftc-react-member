@@ -20,9 +20,17 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <div className="html" >
-        <div className="title">FT中文网</div>
-      </div>
+      <div class="header-container">
+        <div class="header-inner">
+        <div class="header-title">会员订阅</div>
+        <div class="header-side header-left" >
+            <div class="header-brand">
+            <figure class="loading" data-url="http://static.ftchinese.com/images/masthead36.png"></figure>
+            </div>
+        </div>
+
+        </div>
+    </div>
     );
   }
 
