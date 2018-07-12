@@ -1,10 +1,9 @@
 import React from 'react';
-// import { Link } from 'react-router-dom'
 import { BrowserRouter as Router, Route,HashRouter,Link } from 'react-router-dom' //应放在顶处，否则会报错
 
 const Tab1 = () => (
   <div>
-    <h2>Tab1</h2>
+    <h2>Tab11</h2>
   </div>
 )
 
@@ -24,12 +23,12 @@ const Routes = browserHistory => (
   <div>
     <HashRouter>    
         <div>
-            <Link to="/tab1">Tab1</Link>
-            <Link to="/tab2">Tab2</Link>
-            <Link to="/tab3">Tab3</Link>
-            <Route exact path="/tab1" component={Tab1}/>  
-            <Route path="/tab2" component={Tab2}/>
-            <Route path="/tab1" component={Tab3}/>   
+            <div><Link to="/tabContent1">tabContent1</Link></div>
+            <Link to="/tabContent2">tabContent2</Link>
+            <Link to="/tabContent3">tabContent3</Link>
+            <Route exact path="/tabContent1" component={Tab1}/>  
+            <Route path="/tabContent2" component={Tab2}/>
+            <Route path="/tabContent3" component={Tab3}/>   
         </div>
     </HashRouter>
   </div>

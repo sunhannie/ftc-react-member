@@ -94,6 +94,8 @@ use: ExtractTextPlugin.extract({
 })
 ```
 
+browser.js?40b6:38 Uncaught Error: A <Router> may have only one child element
+
 ## 最终文件布局
 一个组件，一个css文件。
 好像extract-text-webpack-plugin没有生效
@@ -147,3 +149,7 @@ let response1 = (()=>{
 })
 ```
 react标签中不能加style，标签得按照严格模式写，即不能大写
+
+## 我的思路
+怎么把组件变成一个接口，里面传什么数据就渲染什么页面。
+通过props传对象（props是能传对象的吗？），

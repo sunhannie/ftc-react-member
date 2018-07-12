@@ -25,7 +25,7 @@ class Qanda extends React.Component {
         ajax('http://localhost:9000/memberData').then(response => {
             return Promise.resolve(response);
         }).then(response => {
-          console.log(response);
+          // console.log(response);
           let responses = Object.keys(response).map(key => {   
             if(key.indexOf('ontent')>-1){
               let expand = response[key].map((item,index)=>{
@@ -93,7 +93,7 @@ class Qanda extends React.Component {
   render() {
     // 不能在此处map，因为第一次state为默认值
     const {datas,guide,member} = this.state;  
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <div class = "container">

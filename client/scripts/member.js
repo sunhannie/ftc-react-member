@@ -6,6 +6,7 @@ import Nav from '../component/nav/nav.js';
 import QandA from '../component/QandA/QandA.js';
 import Footer from '../component/footer/footer';
 import Routes from './router.js';
+import AllQA from '../component/QandA/allQA';
 
 class App extends React.Component {
 
@@ -18,8 +19,16 @@ class App extends React.Component {
     return (
     	<div>
         <Nav />
-        <QandA />
-        <Routes />
+        {/*<QandA />*/}
+        {/*<Routes />*/}
+
+        <header class="section-header">
+            <div class="section-header__text">
+                <h2>常见问题</h2>
+            </div>
+        </header>
+        <AllQA />
+
         <Footer />
       </div>
     );
