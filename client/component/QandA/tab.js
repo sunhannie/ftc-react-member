@@ -84,13 +84,13 @@ class Tab extends React.Component {
 
     return (
           // <div>
-            <HashRouter>  
+            <Router>  
                 {/*此处div必须要*/}
                 <div>  
                     <div class="o-tabs-container">
                       <ul id="faq_tabs" data-o-component="o-tabs" class="o-tabs" role="tablist">
                         <li role="tab" aria-selected="true" id="tabContent1-label" class="tabContent-label" > 
-                            <Link to="/tabContent1">订阅问题</Link>
+                            <Link to="/">订阅问题</Link>
                         </li>
                         <li role="tab" aria-selected="false" id="tabContent2-label" class="tabContent-label">
                             <Link to="/tabContent2">支付问题</Link>
@@ -100,11 +100,11 @@ class Tab extends React.Component {
                         </li>
                       </ul>
                     </div>
-                    <Route exact path="/tabContent1" component={TabContent1}/>  
+                    <Route exact path="/" component={TabContent1}/>  
                     <Route path="/tabContent2" component={Tab2}/>
                     <Route path="/tabContent3" component={Tab3}/>   
                 </div>
-            </HashRouter>
+            </Router>
           // </div>
 
 
