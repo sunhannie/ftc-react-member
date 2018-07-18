@@ -8,7 +8,8 @@ import Footer from '../component/footer/footer';
 import Routes from './router.js';
 import AllQA from '../component/QandA/allQA';
 import Comment from '../component/comment/comment';
-
+import TabTitle from '../component/QandA/tabTitle';
+import Member from '../component/QandA/member';
 class App extends React.Component {
 
   constructor(props) {
@@ -20,7 +21,7 @@ class App extends React.Component {
 
     const comment = {
         date: new Date(),
-        text: 'I hope you enjoy learning React!',
+        text: 'I hope you enjoy learning React1!',
         author: {
             name: 'Hello Kitty',
             avatarUrl: 'http://placekitten.com/g/64/64',
@@ -29,10 +30,10 @@ class App extends React.Component {
     return (
     	<div>
         <Nav name="会员订阅"/>
-        {/*<Nav name="会员订阅1"/>*/}
         {/*<QandA />*/}
-        <Comment date={comment.date} text={comment.text} author={comment.author}/>
-
+        {/*<Comment date={comment.date} text={comment.text} author={comment.author}/>*/}
+        <TabTitle />
+        <Member />
         <header class="section-header">
             <div class="section-header__text">
                 <h2>常见问题</h2>

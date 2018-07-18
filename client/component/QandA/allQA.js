@@ -6,9 +6,6 @@ import ajax from '../../../util/ajax.js';
 import TabContent1 from './tabContent';
 import Tab from './tab';
 
-import main from './main.scss';
-
-
 
 
 class AllQA extends React.Component {
