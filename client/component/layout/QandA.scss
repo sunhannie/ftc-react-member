@@ -198,7 +198,7 @@ $qa-img-background: #33302e;
 
 }
 .tabContent{
-  display: none;
+  // display: none;
 }
 #tabContent1{
   display: block;
@@ -260,17 +260,13 @@ $qa-img-background: #33302e;
         }
       }
       .o-expander__content {
-        // padding: 0px $tab-padding-wide;
         background: #fff1e5;
         overflow: hidden;
         font-size: 15px;
-        // overflow: scroll;
         display: block!important;
-        max-height:0px;
+        // max-height:0px;
         .o-content_wrap{
-          // width: 80%;
           margin: 0 auto;
-          // padding: 20px 60px;
           .o-content{
                 padding: 0px 0px 10px;
                 .o-content_body{
@@ -283,6 +279,12 @@ $qa-img-background: #33302e;
           }
         }
         
+      }
+      .max-height_default{
+        max-height:0px;
+      }
+      .max-height_new{
+        max-height:700px;
       }
   }
 

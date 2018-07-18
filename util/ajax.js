@@ -24,11 +24,18 @@ function ajax(url, formData) {
 //     headers.set('Content-Type', 'application/json');
 //   }
 
+  // const init = {
+  //   method: formData ? 'POST' : 'GET',
+  //   headers:headers,
+  //   mode: 'same-origin',
+  //   credentials: 'same-origin',
+  //   redirect: 'error'
+  // }
   const init = {
     method: formData ? 'POST' : 'GET',
     headers:headers,
-    mode: 'same-origin',
-    credentials: 'same-origin',
+    mode: 'cors',
+    credentials: 'include',
     redirect: 'error'
   }
 

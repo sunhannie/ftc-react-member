@@ -156,3 +156,9 @@ react标签中不能加style，标签得按照严格模式写，即不能大写
 
 做一个实例用props，子类从父类那获取props，一般获取什么值呢？比如点击，把值传递出去
 学习处理动态变化
+
+
+ //  bb={!(`${this.state.ariaExpanded}` )? '1':'2'}    bb={(`${this.state.ariaExpanded}`)=="false"? '1':'2'}  
+ 直接出来boolean就出错了
+
+ class={`o-expander__content ${(dataIndex == index) && (`${this.state.ariaExpanded}`)=="true" ? ' max-height_new' : 'max-height_default'}`}
