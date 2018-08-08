@@ -162,3 +162,6 @@ react标签中不能加style，标签得按照严格模式写，即不能大写
  直接出来boolean就出错了
 
  class={`o-expander__content ${(dataIndex == index) && (`${this.state.ariaExpanded}`)=="true" ? ' max-height_new' : 'max-height_default'}`}
+
+
+ 包含请求、渲染、class、import、配置顺序，下一个项目可以添加alias和css分离
