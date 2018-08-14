@@ -34,6 +34,7 @@ class Member extends React.Component {
   }
 
   render() {
+    
     // 不能在此处map，因为第一次state为默认值
     const {datas,guide} = this.state;  
     console.log(this.state);
