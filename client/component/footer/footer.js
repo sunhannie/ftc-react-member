@@ -6,7 +6,6 @@ import classnames from 'classnames';
 
 import footer from '../layout/footer.scss';
 
-
 class Footer extends React.Component {
 
 
