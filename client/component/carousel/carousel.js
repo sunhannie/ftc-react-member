@@ -170,16 +170,16 @@ class Carousel extends React.Component {
     /*容器的hover事件*/
     mouseover(){
         this.stopAutoPlay();
+        // this.setState({
+        //     index:Number(this.state.index)
+        // });
+        console.log('mouseover ：'+this.state.index);
     }
     mouseout(){
         this.autoPlay();
     }
 
     render() {
-        //  ref={ele => {this.liEle = ele; }}
-        var numbers = [1,2,3,4,5,6,7,8,9];
-    //     const dotsEle = numbers.map(function(item,i){
-    // 　　　　　　　return <li key={i} index={i} className="dot" onClick={this.dotClick}></li>})
         return (
 
    <div className = {"carousel-container"} onMouseOver={this.mouseover.bind(this)} onMouseOut={this.mouseout.bind(this)} ref={"container"} style={{color:'red'}}>
