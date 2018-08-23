@@ -95,7 +95,7 @@ class TabContent extends React.Component {
         let dataIndex = this.state.dataIndex;
         dataIndex = parseInt(dataIndex);
         let ariaExpanded = this.state.ariaExpanded;
-        console.log(parseInt(dataIndex));
+        // console.log(parseInt(dataIndex));
         return (
 
             

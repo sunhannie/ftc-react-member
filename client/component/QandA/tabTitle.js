@@ -51,13 +51,13 @@ class TabTitle extends React.Component {
   //   return true
   // }
   handleChange(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   render() {
     // 不能在此处map，因为第一次state为默认值
     const {datas,guide} = this.state;  
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div class = "container">
           <div class="welcome-guide width-cls">

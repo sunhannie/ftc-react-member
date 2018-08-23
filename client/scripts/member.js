@@ -10,6 +10,8 @@ import AllQA from '../component/QandA/allQA';
 import Comment from '../component/comment/comment';
 import TabTitle from '../component/QandA/tabTitle';
 import Member from '../component/QandA/member';
+import Carousel from '../component/carousel/carousel.js';
+
 class App extends React.Component {
 
   constructor(props) {
@@ -18,7 +20,7 @@ class App extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.children);
     const comment = {
         date: new Date(),
         text: 'I hope you enjoy learning React1!',
@@ -40,7 +42,7 @@ class App extends React.Component {
             </div>
         </header>
         <AllQA />
-
+        <Carousel />
         <Footer />
       </div>
     );

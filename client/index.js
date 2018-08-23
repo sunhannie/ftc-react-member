@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Nav from './component/nav/nav.js';
 import Login from './component/login/login.js';
 
+
 class App extends React.Component {
 
   constructor(props) {
@@ -18,7 +19,7 @@ class App extends React.Component {
     	<div>
         <Nav />
         <Login />
-        
+
       </div>
     );
   }

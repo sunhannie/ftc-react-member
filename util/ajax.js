@@ -48,7 +48,7 @@ function ajax(url, formData) {
     if (res.status !== 200) {
       return Promise.reject(res.statusText);
     }
-    console.log('Fetch got response');
+    // console.log('Fetch got response');
     return res.json();
   })
   .then(json => {

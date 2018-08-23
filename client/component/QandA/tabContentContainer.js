@@ -39,7 +39,7 @@ class TabContentContainer extends React.Component {
     render() {
         // 不能在此处map，因为第一次state为默认值
         const { tabData } = this.state;
-        console.log(location.href)
+        // console.log(location.href)
         var aa = location.href;
 
         return (
