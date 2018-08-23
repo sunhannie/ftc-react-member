@@ -16,7 +16,7 @@ const Tab2 = () => (
 
 const Tab3 = () => (
   <div>
-    <h2>Tab3</h2>
+    <h2>Tab3 content</h2>
   </div>
 )
 
@@ -70,7 +70,7 @@ class Tab extends React.Component {
                     </div>
                     <Route exact path="/" component={TabContentContainer}/>  
                     <Route path="/tabContent2" component={Tab2}/>
-                    <Route path="/tabContent3" component={TabContentContainer}/>   
+                    <Route path="/tabContent3" component={Tab3}/>   
                 </div>
             </Router>
           // </div>

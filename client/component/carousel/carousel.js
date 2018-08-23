@@ -94,7 +94,7 @@ class Carousel extends React.Component {
         this.isNext = false;
         this.autoPlay();
         // console.log( ReactDOM.findDOMNode(this.refs.container).style.width); 
-        this.listEle.style.color = 'red';
+        // this.listEle.style.color = 'red';
     }
 
     autoPlay(){
