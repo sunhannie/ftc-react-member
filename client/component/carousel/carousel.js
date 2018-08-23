@@ -7,10 +7,10 @@ class Carousel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: 1,  
-            timer:''       
+            index: 1 ,
+            isNext:false    
         }
-        // var index=1,timer;
+        this.dotIndex = this.dotIndex.bind(this);
     }
 /**
  * 轮播思路：
@@ -21,120 +21,151 @@ class Carousel extends React.Component {
 5、图片上有一组小圆点用于与当前显示的图片相对应，同时可以通过点击的方式查看对应的图片 
 6、图片可以通过点击进行左右滑动显示 
  */
-
- _dotActive(){
-    var dots = document.getElementsByClassName("dot");
-    var len = dots.length;
-    for(var i=0 ;i<len ;i++){
-        dots[i].className = "dot";
-    }
-    var index =2 ;
-    for(var i=0;i<len;i++){
-        /*此处可以不用parseInt，当不用全等时*/
-        if(index === parseInt(dots[i].getAttribute("index"))){
-            dots[i].className = "dot active";
+    _dotActive(){
+        var dots = document.getElementsByClassName("dot");
+        var len = dots.length;
+        for(var i=0 ;i<len ;i++){
+            dots[i].className = "dot";
         }
+        for(var i=0;i<len;i++){
+            if(this.state.index === parseInt(dots[i].getAttribute("index"))){
+                dots[i].className = "dot active";
+            }
+        }
+        console.log('_dotActive this.state.index'+this.state.index); //因为没有相等，获取被点击的对象
+      
     }
-    console.log(len);
- }
-eventBind(){
-  /*点的点击事件*/
-  var dots = document.getElementsByClassName("dot");
-  var len = dots.length;
-  for(var i=0;i<len;i++){
-  (function(j){
-    dots[j].onclick = function(e){
-     var ind = parseInt(dots[j].getAttribute("index"));
-    //  animation((index - ind)*(-600));
-    //  index = ind;
-     _dotActive(); //这个作用域读取不到外面的
-    }
-   })(i)
-  }
 
- }
+    dotIndex(add){
+        // 往下点up和down值都一样，证明没那么快响应，没有累加动作。我觉得是刚放上去还没到1000s，那步还没有执行
+        console.log('dotIndex up this.state.index'+this.state.index);
+        if(add){
+            this.setState({
+                index:Number(this.state.index)+1
+            },() => {
+                if(this.state.index > 6){
+                    this.setState({
+                        index:1
+                    })
+                }else if(this.state.index < 1){
+                    this.setState({
+                        index:6
+                    })
+                } 
+            })
+        }
+        else{
+            this.setState({
+                index:Number(this.state.index)-1
+            },() => {
+                if(this.state.index > 6){
+                    this.setState({
+                        index:1
+                    })
+                }else if(this.state.index < 1){
+                    this.setState({
+                        index:6
+                    })
+                } 
+            })
+        }
+        // 如果是异步，可能此处还不能获取到this.state.index，应该用函数形式。但是此例子获取到了，可是不用函数this.state.index会到7
+        // if(this.state.index > 6){
+        //     this.setState({
+        //         index:1
+        //     })
+        // }else if(this.state.index < 1){
+        //     this.setState({
+        //         index:6
+        //     })
+        // } 
+
+        console.log('dotIndex down this.state.index'+this.state.index);
+    }
 
     componentWillMount() {
-       
-        
+
     }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }    
+    // 能获取到行内标签，但是获取不到行外标签
     componentDidMount() {
-        //   this.init();onClick只能在渲染后才能触发
-       var dots = document.getElementsByClassName("dot");
-       var next = document.getElementsByClassName("next")[0];
-       next.onclick = function (e) {  
-          console.log(dots);
-       }
-       this.eventBind();
-       this._dotActive();
+        this.isNext = false;
+        this.autoPlay();
+        // console.log( ReactDOM.findDOMNode(this.refs.container).style.width); 
+        this.listEle.style.color = 'red';
     }
- 
-//  init(){
-//   this.eventBind();
-//   this.autoPlay();
-//  }
- 
 
- autoPlay(){
-    this.setState({
-        
-    })
-//    timer =setInterval(function () {
-//    this.animation(-600);
-//    this.dotIndex(true);
-//   },1000)
- }
- stopAutoPlay() {
-//   clearInterval(timer);
- }
- dotIndex(add){
-    // if(add){
-    //     index++;
-    // }
-    // else{
-    //     index--;
-    // }
-    // if(index>5){
-    //     index = 1;
-    // }
-    // if(index<1){
-    //     index = 5;
-    // }
-    // this.dotActive();
- }
+    autoPlay(){
+        // var dots = document.getElementsByClassName("dot");
+        // var len = dots.length;
+        // 需要使用箭头函数
+        this.interval = setInterval( () => {
+            this.animation(-600);
+            this.dotIndex(true);
+            this._dotActive();
 
-//   /*箭头事件的绑定*/
-//   var pre = document.getElementsByClassName("pre")[0];
-//   var next = document.getElementsByClassName("next")[0];
-//   pre.onclick = function (e) {
-//     this.dotIndex(false);
-//     this.animation(600);
-//   }
-//   next.onclick = function (e) {
-//    this.dotIndex(true);
-//    this.animation(-600);
-//   }
+            console.log(this.state.index);
+        },1000)
+    }
+
+    stopAutoPlay() {
+        clearInterval(this.interval);
+    }
+// 图片往下走，但是按钮是跟state对应着。第一次点击放上去没有反映。
     animation(offset){
         var lists = document.getElementsByClassName("list")[0];
         var left = parseInt(lists.style.left.slice(0,lists.style.left.indexOf("p"))) + offset;
         if(left<-3000){
-            lists.style.left = "-600px";
-        }else if(left>-600){
+            lists.style.left = "0px";
+        }else if(left>0){
             lists.style.left = "-3000px";
         }else{
             lists.style.left = left+"px";
         }
     }
     // 当点击需要做更新样式和动画
-    dotClick(){
-        // this.liEle.className
-        // this.dotActive() ;
-    }
-    preClick(){
+    dotClick(event){
+        event.preventDefault();
+        var dots = document.getElementsByClassName("dot");
+        var len = dots.length;
+        for(var i=0 ;i<len ;i++){
+            dots[i].className = "dot";
+        }
 
+        let index = event.target.getAttribute("index");    
+        let index1 = this.state.index;
+
+        if(this.state.index === index){
+                event.target.className = "dot active";
+        }
+
+        this.setState({
+            index:index
+        })
+        this.animation(( this.state.index - index)*(-600));
+        
+        // this._dotActive() ;
+        console.log('index:'+index);
+    }
+
+    // 得出结论，click动作中不能再获取函数，不然出错。
+    // 鼠标放上去，先获取不到index
+    preClick(){
+        this.animation(600);
+        this.dotIndex(false);
+        this._dotActive();
     }
     nextCilck(){
-
+        
+        this.isFirstNext = true;
+        this.animation(-600);
+        this.dotIndex(true);
+        
+        this._dotActive();
+        
+        // 点击右边图片有立马更新，但是指引没有立马更新，再点一次才更新
     }
     /*容器的hover事件*/
     mouseover(){
@@ -145,39 +176,33 @@ eventBind(){
     }
 
     render() {
+        //  ref={ele => {this.liEle = ele; }}
         var numbers = [1,2,3,4,5,6,7,8,9];
     //     const dotsEle = numbers.map(function(item,i){
-    // 　　　　　　　return <li key={i} index={i} className="dot" onClick={this.dotClick.bind(this)} ref={ele => {this.liEle = ele; }}></li>
-    // 　　　　　　})
+    // 　　　　　　　return <li key={i} index={i} className="dot" onClick={this.dotClick}></li>})
         return (
 
-   <div className="carousel-container" onMouseOver={this.mouseover.bind(this)} onMouseOut={this.mouseout.bind(this)}>
-        <div className="list" >
+   <div className = {"carousel-container"} onMouseOver={this.mouseover.bind(this)} onMouseOut={this.mouseout.bind(this)} ref={"container"} style={{color:'red'}}>
+        <div className="list" ref={ele => {this.listEle = ele; }}style={{left:'0px'}} >
             <img src="http://www.ftacademy.cn/subscription.jpg"/>
             <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000079465_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
+            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F8%2F000063428_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
+            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F3%2F000068223_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
             <img src="http://www.ftacademy.cn/subscription.jpg"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000079465_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="http://www.ftacademy.cn/subscription.jpg"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000079465_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="http://www.ftacademy.cn/subscription.jpg"/>
+            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000069135_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
+            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F0%2F000054320_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
         </div>
-        {/*<ul className="dots">
-          {
-    　　　　　　numbers.map(function(item,i){
-    　　　　　　　　return <li key={i} index={i} className="dot" onClick={this.dotClick.bind(this)} ref={ele => {this.liEle = ele; }}></li>
-    　　　　　　})
-    　　　　}
-        </ul>*/}
-        {/*<ul className="dots">{dotsEle}</ul>*/}
+
         <ul className="dots">
             <li index='1' className="active dot" onClick={this.dotClick.bind(this)}></li>
-            <li index='2' className="dot"></li>
-            <li index='3' className="dot"></li>
-            <li index='4' className="dot"></li>
-            <li index='5' className="dot"></li>
+            <li index='2' className="dot"  onClick={this.dotClick.bind(this)}></li>
+            <li index='3' className="dot"  onClick={this.dotClick.bind(this)}></li>
+            <li index='4' className="dot"  onClick={this.dotClick.bind(this)}></li>
+            <li index='5' className="dot"  onClick={this.dotClick.bind(this)}></li>
+            <li index='6' className="dot"  onClick={this.dotClick.bind(this)}></li>
         </ul>
-        <div className="pre" onClick={this.preClick.bind(this)}> z </div>
-        <div className="next" onClick={this.nextCilck.bind(this)}> y </div>
+        <div className="pre" onClick={this.preClick.bind(this)}> 《 </div>
+        <div className="next" onClick={this.nextCilck.bind(this)}> 》 </div>
  </div> 
         );
     }
