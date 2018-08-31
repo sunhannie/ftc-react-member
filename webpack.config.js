@@ -16,7 +16,8 @@ module.exports = {
     {
         'index':['./client/index.js'],
         'signup':['./client/scripts/signup.js'],
-        'member':['./client/scripts/member.js']
+        'member':['./client/scripts/member.js'],
+        'vendor': ['react', 'react-dom', 'jquery','react-router']
     },
     output: {
         path: path.join(__dirname, 'tmp/'),  //这儿好像没起作用
