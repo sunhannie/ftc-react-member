@@ -29,24 +29,3 @@ function render(template, context) {
 
 module.exports = render;
 
-/** 如果使用koa-views, 本文件应该这么写：
-  const views = require('koa-views');
-
-  const path = require('path');
-
-  module.exports = views(
-    path.join(__dirname, '../demo/views'), {
-      map: {
-        html: 'nunjucks'
-      }
-  });
-
-** server.js应该这么写：
-  app.use(logger());
-  app.use(render);
-  app.use(bodyParser());
-  ...
-  router.get('/', async ctx => {
-    await ctx.render('app',{})
-  });
-*/

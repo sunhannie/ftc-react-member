@@ -48,7 +48,6 @@ function ajax(url, formData) {
     if (res.status !== 200) {
       return Promise.reject(res.statusText);
     }
-    // console.log('Fetch got response');
     return res.json();
   })
   .then(json => {
@@ -61,38 +60,3 @@ function ajax(url, formData) {
 
 export default ajax;
 
-
-// http://www.ftchinese.com/index.php/jsapi/paywall
-// const init = {
-//     method: 'GET',
-//     headers : { // 请求头（可以是Headers对象，也可是JSON对象）
-//         'Content-Type': 'application/json',
-//         'Accept': 'application/json'
-//     },
-//     mode: 'same-origin',
-//     credentials: 'same-origin',
-//     redirect: 'error'
-// }
-// const fetchPosts =  () => {
-// return fetch('http://localhost:9000/memberData',init)
-// .then(response => response.json())
-// .then(json => {
-// if (json.error) {
-//     return Promise.reject(`API Error: ${json.message}`);
-// }
-//     return json;
-// });
-// }
-
-// let div = undefined;
-// fetchPosts().then(data => {
-//     return Promise.resolve(data);
-// }).then(data => {
-//     newData = Object.assign({}, data);
-//     aClone = data;
-//     console.log(aClone);
-// }).catch(e => {
-//     console.log(e);
-//     alert(`Error: ${e}`);
-// });
-// console.log(newData);
