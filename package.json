@@ -1,5 +1,5 @@
 {
-  "name": "react-member",
+  "name": "@ftchinese/react-member",
   "version": "1.0.0",
   "description": "It can guide user to download app in different platform",
   "main": "tmp/index.js",
