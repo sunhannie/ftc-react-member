@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import   './carousel.scss';
-
+import Slide from './slide';
+// import Dots from './oneDot';
+import  { imgs } from  './imgs';
 class Carousel extends React.Component {
     constructor(props) {
         super(props);
@@ -94,7 +96,6 @@ class Carousel extends React.Component {
         this.isNext = false;
         this.autoPlay();
         // console.log( ReactDOM.findDOMNode(this.refs.container).style.width); 
-        // this.listEle.style.color = 'red';
     }
 
     autoPlay(){
@@ -180,29 +181,28 @@ class Carousel extends React.Component {
     }
 
     render() {
+// onClick={this.dotClick.bind(this)} 不能写在map中，我觉得是不能用this
+    let lis = imgs.slice(1).map(function(v,k){
+        return <li index={`${k+1}`} className="dot" key={k} ></li>
+    });
+
+
         return (
 
    <div className = {"carousel-container"} onMouseOver={this.mouseover.bind(this)} onMouseOut={this.mouseout.bind(this)} ref={"container"} style={{color:'red'}}>
-        <div className="list" ref={ele => {this.listEle = ele; }}style={{left:'0px'}} >
-            <img src="http://www.ftacademy.cn/subscription.jpg"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000079465_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F8%2F000063428_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F3%2F000068223_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="http://www.ftacademy.cn/subscription.jpg"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F5%2F000069135_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fi.ftimg.net%2Fpicture%2F0%2F000054320_piclink.jpg?source=ftchinese&width=500&height=282&fit=cover&from=next001"/>
-        </div>
-
+        <Slide />
         <ul className="dots">
-            <li index='1' className="active dot" onClick={this.dotClick.bind(this)}></li>
+            {/*<li index='1' className="active dot" onClick={this.dotClick.bind(this)}></li>
             <li index='2' className="dot"  onClick={this.dotClick.bind(this)}></li>
             <li index='3' className="dot"  onClick={this.dotClick.bind(this)}></li>
             <li index='4' className="dot"  onClick={this.dotClick.bind(this)}></li>
             <li index='5' className="dot"  onClick={this.dotClick.bind(this)}></li>
-            <li index='6' className="dot"  onClick={this.dotClick.bind(this)}></li>
+            <li index='6' className="dot"  onClick={this.dotClick.bind(this)}></li>*/}
+            {lis}
         </ul>
         <div className="pre" onClick={this.preClick.bind(this)}> 《 </div>
         <div className="next" onClick={this.nextCilck.bind(this)}> 》 </div>
+        {/*<Dots/>*/}
  </div> 
         );
     }

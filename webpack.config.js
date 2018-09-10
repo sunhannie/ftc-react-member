@@ -111,7 +111,6 @@ module.exports = {
     },
 
     plugins: [
-    //    extractSass
        extractCSS
     ],
     watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
