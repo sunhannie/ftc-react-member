@@ -18,18 +18,14 @@ class Qanda extends React.Component {
     
   }
 
-  componentWillMount() {
-    // console.log(QandA);
-  }
+
   componentDidMount() {
         ajax('http://localhost:9000/memberData').then(response => {
             return Promise.resolve(response);
         }).then(response => {
-          // console.log(response);
           let responses = Object.keys(response).map(key => {   
             if(key.indexOf('ontent')>-1){
               let expand = response[key].map((item,index)=>{
-              // console.log(item.answers);
                 return <div class="o-expander" id="o-expander" key={index}>
                      <div class="toggle" aria-expanded="false" >
                         <a class="o-expander__toggle" aria-controls="o-expander__one">{item.question}<i></i>
@@ -49,8 +45,6 @@ class Qanda extends React.Component {
 
             }
           });
-
-          // let guide = ''; Uncaught Error: Module build failed: Duplicate declaration "guide"
           let member = response.index.map((item,index)=>{
             return  <div class="words">
               <div class="first"><strong>{item.title}</strong></div>
@@ -63,19 +57,12 @@ class Qanda extends React.Component {
               return <div class="words"><div class="first"><strong>{response.guide.first}</strong></div><div class="second">{response.guide.second}</div></div>
           })
 
-
-
-
             this.setState({
               datas:responses,
               guide:guide(),
               member:member
             });
 
-            // this.setState((prevState, props) => ({
-            //   datas:responses,
-            //   response: response1()
-            // }));
         })
         
   }
@@ -197,17 +184,6 @@ class Qanda extends React.Component {
                 </select>
               </div>
           </div>
-          {/*<div  id= "tabContentContainer">
-            <div class="tabContent" id= "tabContent1">
-              {this.state.tabContent}
-            </div>
-            <div class="tabContent" id= "tabContent2">
-              {this.state.tabContent}
-            </div>
-            <div class="tabContent" id= "tabContent3">
-              {this.state.tabContent}
-            </div>
-          </div>  */}
           <div  id= "tabContentContainer">
             {this.state.datas}
           </div> 

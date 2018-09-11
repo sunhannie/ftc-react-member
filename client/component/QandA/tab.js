@@ -29,9 +29,6 @@ class Tab extends React.Component {
     
   }
 
-  componentWillMount() {
-    // console.log(QandA);
-  }
   componentDidMount() {
 
   }
@@ -39,19 +36,15 @@ class Tab extends React.Component {
   componentWillReceiveProps(nextProps) {
     
   }
-  // shouldComponentUpdate(){
-  //   return true
-  // }
+
   handleChange(event) {
     console.log(event);
   }
 
   render() {
-    // 不能在此处map，因为第一次state为默认值
     const {data} = this.state;  
-    // console.log(data);
     return (
-          // <div>
+
             <Router>  
                 {/*此处div必须要*/}
                 <div>  
@@ -73,12 +66,6 @@ class Tab extends React.Component {
                     <Route path="/tabContent3" component={Tab3}/>   
                 </div>
             </Router>
-          // </div>
-
-
-
-
-        
 
     );
   }

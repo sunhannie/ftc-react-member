@@ -10,7 +10,6 @@ import AllQA from '../component/QandA/allQA';
 import Comment from '../component/comment/comment';
 import TabTitle from '../component/QandA/tabTitle';
 import Member from '../component/member/member';
-import Carousel from '../component/carousel/carousel.js';
 
 class App extends React.Component {
 
@@ -42,7 +41,6 @@ class App extends React.Component {
             </div>
         </header>
         <AllQA />
-        <Carousel />
         <Footer />
       </div>
     );

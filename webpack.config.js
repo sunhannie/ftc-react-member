@@ -4,10 +4,6 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin"); 
 const extractCSS = new ExtractTextPlugin('one.css'); 
 
-// const extractSass = new ExtractTextPlugin({
-//     filename: "[name].[contenthash].css",
-//     disable: process.env.NODE_ENV === "development"
-// });
 
 module.exports = {
     mode: "development", 
@@ -20,18 +16,16 @@ module.exports = {
         'vendor': ['react', 'react-dom', 'react-router']
     },
     output: {
-        path: path.join(__dirname, 'tmp/'),  //这儿好像没起作用
-        filename: '[name].js', //输出文件名，[name].js默认是main.js。如果指定则是指定名
-        publicPath: '/tmp/', //这个一定得注意，之前我写tmp/，导致一直找不到js文件路劲
-        chunkFilename: "[chunkhash].js"   //这个好像没起作用，应该研究用处和区别
+        path: path.join(__dirname, 'tmp/'),  
+        filename: '[name].js', 
+        publicPath: '/tmp/', 
+        chunkFilename: "[chunkhash].js"   
     },
     module: {
         rules:[
              {
                 test: /\.js|\.jsx$/,
-                // include: [
-                //     path.join(__dirname, 'client'),
-                // ],
+     
                 exclude: [
                     path.resolve(__dirname, "node_modules")
                 ],
@@ -46,20 +40,11 @@ module.exports = {
                     path.resolve(__dirname, "node_modules")
                 ],
                 loader: 'style-loader!css-loader?modules&importLoaders&localIdentName=[name]__[local]__[hash:base64:5]!sass-loader?sourceMap=true&sourceMapContents=true',
-                // use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
-             
              },
              {
                 test: /\.json?$/,
                 loader: 'json'
              },
-            //  {
-            //     test: /\.scss$/,
-            //     exclude: [
-            //         path.resolve(__dirname, "node_modules")
-            //     ],
-            //     loader: 'style-loader!css-loader!sass-loader?sourceMap=true&sourceMapContents=true'    //用此方法靠style type="text/css"引入
-            //  },
              {
                 test: /\.html$/,
                 use: [
@@ -82,10 +67,6 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader',  // 将 CSS 转化成 CommonJS 模块
-                        // options: {
-                        //     modules: true,
-                        //     sourceMap: true   //添加了它会变成用外链引入，比如<link type="text/css" rel="stylesheet" href="blob:http://localhost:9000/d0adec7b-34ef-470b-bac1-9559f9f6eb5e">
-                        // }
                     },
                     {
                         loader: 'sass-loader',  // 将 Sass 编译成 CSS
@@ -113,6 +94,6 @@ module.exports = {
     plugins: [
        extractCSS
     ],
-    watch: true //这意味着在初始构建之后，webpack将继续监视任何已解析文件的更改。手表模式默认关闭
+    watch: true 
     
 };
